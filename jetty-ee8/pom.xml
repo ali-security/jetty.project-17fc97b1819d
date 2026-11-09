@@ -42,7 +42,6 @@
     <checkstyle.skip>true</checkstyle.skip>
     <ee8.jakarta.activation.api.version>1.2.2</ee8.jakarta.activation.api.version>
     <ee8.jakarta.bom.version>8.0.0</ee8.jakarta.bom.version>
-    <ee8.jakarta.xml.bind.api.version>2.3.2</ee8.jakarta.xml.bind.api.version>
 
     <ee8.javax.mail.glassfish.version>1.4.1.v201005082020</ee8.javax.mail.glassfish.version>
     <ee8.javax.security.auth.message>1.0.0.v201108011116</ee8.javax.security.auth.message>
@@ -62,13 +61,10 @@
     <dependencies>
       <!-- The EE 8 platform BOM. It manages the Jakarta 8 (javax.* packaged) API
            versions, so entries whose version equals the BOM are not restated here.
-           Two known, never-fixed defects in 8.0.0 are worked around below:
-             1. The BOM's jakarta.persistence-api entry references an undefined
-                property (jakarta-persistence-api.version, hyphenated), so it cannot
-                resolve from the BOM; jakarta.persistence-api is declared explicitly.
-             2. jakarta.xml.bind-api (JAXB) is absent from the 8.0.0 BOM (it was
-                added in 9.0.0). On JDK 11+ JAXB is not on the platform, so
-                jakarta.xml.bind-api is declared explicitly.
+           One known, never-fixed defect in 8.0.0 is worked around below: the BOM's
+           jakarta.persistence-api entry references an undefined property
+           (jakarta-persistence-api.version, hyphenated), so it cannot resolve from
+           the BOM; jakarta.persistence-api is declared explicitly.
            Note: jakarta.activation-api is not managed by this BOM either, so it
            remains an explicit entry below. -->
       <dependency>
@@ -84,20 +80,13 @@
         <artifactId>jakarta.activation-api</artifactId>
         <version>${ee8.jakarta.activation.api.version}</version>
       </dependency>
-      <!-- Workaround for jakarta.jakartaee-bom:8.0.0 defect 1: the BOM's JPA entry
+      <!-- Workaround for the jakarta.jakartaee-bom:8.0.0 defect above: the BOM's JPA entry
            references an undefined property and cannot resolve. 2.2.3 is the EE 8
            version the BOM intended. -->
       <dependency>
         <groupId>jakarta.persistence</groupId>
         <artifactId>jakarta.persistence-api</artifactId>
         <version>2.2.3</version>
-      </dependency>
-      <!-- Workaround for jakarta.jakartaee-bom:8.0.0 defect 2: JAXB is missing from
-           the BOM. 2.3.x is the EE 8 (javax.xml.bind) level, required on JDK 11+. -->
-      <dependency>
-        <groupId>jakarta.xml.bind</groupId>
-        <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>${ee8.jakarta.xml.bind.api.version}</version>
       </dependency>
       <dependency>
         <groupId>org.eclipse.jetty.demos</groupId>

@@ -78,13 +78,6 @@
         <artifactId>jakarta.mail-api</artifactId>
         <version>2.1.5</version>
       </dependency>
-      <!-- jakartaee-bom (11.0.0) dropped jakarta.xml.bind-api, so declare it
-           explicitly at the 4.0.5 bugfix rollup; no API changes. -->
-      <dependency>
-        <groupId>jakarta.xml.bind</groupId>
-        <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>4.0.5</version>
-      </dependency>
       <dependency>
         <groupId>org.eclipse.angus</groupId>
         <artifactId>angus-activation</artifactId>

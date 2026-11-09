@@ -112,15 +112,6 @@
         <artifactId>jakarta.websocket-client-api</artifactId>
         <version>2.1.1</version>
       </dependency>
-      <!-- Override of jakartaee-bom (4.0.0): rolls up bug fixes through 4.0.5
-           (spec-compliant parseBoolean, OSGi mediator support, DatatypeConverter and
-           base64 handling fixes, faster unmarshalling).
-           No API changes. -->
-      <dependency>
-        <groupId>jakarta.xml.bind</groupId>
-        <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>4.0.5</version>
-      </dependency>
       <dependency>
         <groupId>org.eclipse.angus</groupId>
         <artifactId>angus-activation</artifactId>
