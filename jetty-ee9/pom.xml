@@ -70,9 +70,10 @@
         <version>${ee9.jakarta.activation.api.version}</version>
       </dependency>
       <!-- API+IMPL: one artifact carrying both the Jakarta Mail API and its
-           implementation (absent from jakartaee-bom).
-           Legacy line: (active development moved to Eclipse Angus).
-           Security: 2.0.2 fixes CVE-2025-7962 (SMTP injection via CR/LF).
+           implementation. The jakartaee-bom (9.1.0) manages this at 2.0.1;
+           overridden here to 2.0.2 for the CVE-2025-7962 fix (SMTP injection
+           via CR/LF).
+           Legacy line: active development moved to Eclipse Angus.
            No API changes. -->
       <dependency>
         <groupId>com.sun.mail</groupId>
@@ -92,7 +93,7 @@
         <artifactId>jakarta.inject-api</artifactId>
         <version>2.0.1</version>
       </dependency>
-      <!-- jersey 3.0.x transitively needs these patch releases; pinned to satisfy
+      <!-- jersey 3.0.x transitively needs these patch releases; raised to satisfy
            RequireUpperBoundDeps (the jakartaee-bom 9.1.0 manages older patches).
            Kept within the EE9 spec level: json-api 2.0.x (JSON-P 2.0) and
            validation-api 3.0.x (Bean Validation 3.0). Do NOT bump to 2.1.x / 3.1.x,

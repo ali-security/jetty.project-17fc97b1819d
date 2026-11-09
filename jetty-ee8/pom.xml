@@ -65,10 +65,10 @@
            Two known, never-fixed defects in 8.0.0 are worked around below:
              1. The BOM's jakarta.persistence-api entry references an undefined
                 property (jakarta-persistence-api.version, hyphenated), so it cannot
-                resolve from the BOM; jakarta.persistence-api is pinned explicitly.
+                resolve from the BOM; jakarta.persistence-api is declared explicitly.
              2. jakarta.xml.bind-api (JAXB) is absent from the 8.0.0 BOM (it was
                 added in 9.0.0). On JDK 11+ JAXB is not on the platform, so
-                jakarta.xml.bind-api is pinned explicitly.
+                jakarta.xml.bind-api is declared explicitly.
            Note: jakarta.activation-api is not managed by this BOM either, so it
            remains an explicit entry below. -->
       <dependency>
