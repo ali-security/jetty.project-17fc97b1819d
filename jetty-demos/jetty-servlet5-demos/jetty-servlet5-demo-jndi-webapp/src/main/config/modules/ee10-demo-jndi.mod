@@ -17,7 +17,6 @@ jdbc
 ee10-plus
 ee10-jndi
 ee10-mail
-ee10-activation
 ee10-demo-mock-resources
 
 [files]

@@ -10,7 +10,7 @@ ee8
 ee8.javax.mail.glassfish.version?=@version(org.eclipse.jetty.orbit:javax.mail.glassfish)@
 
 [files]
-maven://org.eclipse.jetty.orbit/javax.mail.glassfish/${ee8.javax.mail.glassfish.version}/jar|lib/ee8/javax.mail.glassfish-${ee8.javax.mail.glassfish.version}.jar
+maven://org.eclipse.jetty.orbit/javax.mail.glassfish/${ee8.javax.mail.glassfish.version}/jar|lib/ee8/support/org.eclipse.jetty.orbit.javax.mail.glassfish-${ee8.javax.mail.glassfish.version}.jar
 
 [lib]
-lib/ee8/javax.mail.glassfish-${ee8.javax.mail.glassfish.version}.jar
+lib/ee8/support/org.eclipse.jetty.orbit.javax.mail.glassfish-${ee8.javax.mail.glassfish.version}.jar

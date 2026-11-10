@@ -40,7 +40,6 @@
   </modules>
 
   <properties>
-    <ee9.jakarta.activation.api.version>2.0.1</ee9.jakarta.activation.api.version>
     <ee9.jakarta.bom.version>9.1.0</ee9.jakarta.bom.version>
     <ee9.jakarta.servlet.jsp.jstl.impl.version>2.0.0</ee9.jakarta.servlet.jsp.jstl.impl.version>
     <ee9.jakarta.websocket.api.version>2.0.0</ee9.jakarta.websocket.api.version>
@@ -67,7 +66,7 @@
       <dependency>
         <groupId>com.sun.activation</groupId>
         <artifactId>jakarta.activation</artifactId>
-        <version>${ee9.jakarta.activation.api.version}</version>
+        <version>2.0.1</version>
       </dependency>
       <!-- API+IMPL: one artifact carrying both the Jakarta Mail API and its
            implementation. The jakartaee-bom (9.1.0) manages this at 2.0.1;

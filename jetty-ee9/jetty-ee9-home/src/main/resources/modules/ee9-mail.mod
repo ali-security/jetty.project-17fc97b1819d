@@ -13,7 +13,7 @@ ee9-activation
 ee9.com.sun.mail.jakarta.mail.version?=@version(com.sun.mail:jakarta.mail)@
 
 [files]
-maven://com.sun.mail/jakarta.mail/${ee9.com.sun.mail.jakarta.mail.version}/jar|lib/ee9/jakarta.mail-${ee9.com.sun.mail.jakarta.mail.version}.jar
+maven://com.sun.mail/jakarta.mail/${ee9.com.sun.mail.jakarta.mail.version}/jar|lib/ee9/support/com.sun.mail.jakarta.mail-${ee9.com.sun.mail.jakarta.mail.version}.jar
 
 [lib]
-lib/ee9/jakarta.mail-${ee9.com.sun.mail.jakarta.mail.version}.jar
+lib/ee9/support/com.sun.mail.jakarta.mail-${ee9.com.sun.mail.jakarta.mail.version}.jar

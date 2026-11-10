@@ -12,8 +12,8 @@ ee11.org.eclipse.angus.activation.version?=@version(org.eclipse.angus:angus-acti
 
 [files]
 maven://jakarta.activation/jakarta.activation-api/${ee11.jakarta.activation.api.version}/jar|lib/ee11/jakarta.activation-api-${ee11.jakarta.activation.api.version}.jar
-maven://org.eclipse.angus/angus-activation/${ee11.org.eclipse.angus.activation.version}/jar|lib/ee11/angus-activation-${ee11.org.eclipse.angus.activation.version}.jar
+maven://org.eclipse.angus/angus-activation/${ee11.org.eclipse.angus.activation.version}/jar|lib/ee11/support/org.eclipse.angus.angus-activation-${ee11.org.eclipse.angus.activation.version}.jar
 
 [lib]
 lib/ee11/jakarta.activation-api-${ee11.jakarta.activation.api.version}.jar
-lib/ee11/angus-activation-${ee11.org.eclipse.angus.activation.version}.jar
+lib/ee11/support/org.eclipse.angus.angus-activation-${ee11.org.eclipse.angus.activation.version}.jar

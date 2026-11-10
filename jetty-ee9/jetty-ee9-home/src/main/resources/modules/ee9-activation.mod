@@ -10,7 +10,7 @@ ee9
 ee9.com.sun.activation.jakarta.activation.version?=@version(com.sun.activation:jakarta.activation)@
 
 [files]
-maven://com.sun.activation/jakarta.activation/${ee9.com.sun.activation.jakarta.activation.version}/jar|lib/ee9/jakarta.activation-${ee9.com.sun.activation.jakarta.activation.version}.jar
+maven://com.sun.activation/jakarta.activation/${ee9.com.sun.activation.jakarta.activation.version}/jar|lib/ee9/support/com.sun.activation.jakarta.activation-${ee9.com.sun.activation.jakarta.activation.version}.jar
 
 [lib]
-lib/ee9/jakarta.activation-${ee9.com.sun.activation.jakarta.activation.version}.jar
+lib/ee9/support/com.sun.activation.jakarta.activation-${ee9.com.sun.activation.jakarta.activation.version}.jar

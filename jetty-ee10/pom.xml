@@ -83,8 +83,8 @@
         <artifactId>jakarta.json.bind-api</artifactId>
         <version>3.0.4</version>
       </dependency>
-      <!-- Override of jakartaee-bom: angus-mail / angus-activation require these API
-           levels; raised to satisfy RequireUpperBoundDeps. EE10-level patches of
+      <!-- Override of jakartaee-bom (2.1.0): angus-mail / angus-activation require these
+           API levels; raised to satisfy RequireUpperBoundDeps. EE10-level patches of
            Jakarta Mail / Activation 2.1; no API changes. -->
       <dependency>
         <groupId>jakarta.mail</groupId>

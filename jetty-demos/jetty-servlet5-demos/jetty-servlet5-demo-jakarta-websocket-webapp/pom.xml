@@ -43,8 +43,7 @@
             <!-- The leading '.' is required so bnd analyzes the compiled classes during
             the WAR manifest goal; without it no Import-Package is generated and the
             bundle will not resolve. FELIX-1571 tracks this behavior (listed as fixed
-            in maven-bundle-plugin 2.3.5) but the quirk is still required: verified
-            2026-11-04 against maven-bundle-plugin 5.1.9 / bnd 6.3.1. -->
+            in maven-bundle-plugin 2.3.5) but the quirk is still required. -->
             <Bundle-ClassPath>.,WEB-INF/classes</Bundle-ClassPath>
             <Jetty-Environment>ee9</Jetty-Environment>
           </instructions>
