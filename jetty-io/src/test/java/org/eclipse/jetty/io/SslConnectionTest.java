@@ -272,6 +272,9 @@ public class SslConnectionTest
         Assert.assertEquals(5, len);
         Assert.assertEquals("Hello",new String(buffer,0,len,StandardCharsets.UTF_8));
 
+        // Let the "Hello" dispatch finish before counting, otherwise "World" can be read
+        // inside the still-running first dispatch and the count is racy.
+        Thread.sleep(500);
         _dispatches.set(0);
         client.getOutputStream().write("World".getBytes(StandardCharsets.UTF_8));
         len=5;

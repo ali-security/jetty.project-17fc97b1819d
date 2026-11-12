@@ -1040,8 +1040,14 @@ public class HttpClientStreamTest extends AbstractHttpClientServerTest
         };
         InputStreamContentProvider content = new InputStreamContentProvider(stream);
 
+        // Linux >= 5.3 routes 0.0.0.0/8, so a connect to 0.0.0.1 hangs instead of failing;
+        // use a just-closed local port, which refuses the connection immediately.
+        java.net.ServerSocket closedSocket = new java.net.ServerSocket(0);
+        int closedPort = closedSocket.getLocalPort();
+        closedSocket.close();
+
         final CountDownLatch completeLatch = new CountDownLatch(1);
-        client.newRequest("0.0.0.1", connector.getLocalPort())
+        client.newRequest("127.0.0.1", closedPort)
                 .scheme(scheme)
                 .content(content)
                 .send(new Response.CompleteListener()

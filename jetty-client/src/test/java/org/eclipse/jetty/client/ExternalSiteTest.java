@@ -32,6 +32,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -55,6 +56,7 @@ public class ExternalSiteTest
         client.stop();
     }
 
+    @Ignore("Live-site drift: http://wikipedia.org:80 now answers 301 -> https instead of the 200 this test asserts")
     @Test
     public void testExternalSite() throws Exception
     {
@@ -157,6 +159,7 @@ public class ExternalSiteTest
         }
     }
 
+    @Ignore("Live-site drift: twitter.com/twitter now redirects to x.com and requires TLS>=1.2, which the JDK 7 client does not offer by default")
     @Test
     public void testExternalSiteRedirect() throws Exception
     {

@@ -1,0 +1,86 @@
+# Seal build for jetty-server 9.2.24.v20180105 (Jetty 9.2.x, the Java 7 line).
+# Upstream ships no GitHub Actions CI; it builds on Jenkins (Jenkinsfile: tool jdk7 +
+# maven3, `mvn -B clean install`). This workflow mirrors that build on JDK 7 for the
+# jetty-server module and the reactor modules whose suites cover its code.
+name: seal-build
+
+on:
+  workflow_dispatch:
+    inputs:
+      test-filter:
+        description: "Surefire -Dtest selector; empty runs the full suite"
+        required: false
+        default: ""
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+      # The security override restores JDK 7u80 cert/TLS defaults in every JVM,
+      # including the surefire forks (see .github/seal/jdk7u80-security.properties).
+      JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8 -Djava.security.properties=${{ github.workspace }}/.github/seal/jdk7u80-security.properties
+      MVN_FLAGS: >-
+        -s .github/seal/settings.xml -B -V -e --no-transfer-progress
+        -Dmaven.javadoc.skip=true -Dgpg.skip=true -Dpmd.skip=true
+        -Dlicense.skip=true -Dfindbugs.skip=true -Denforcer.skip=true
+        -Dcheckstyle.skip=true
+      MODULES: jetty-server,jetty-servlet,tests/test-sessions/test-hash-sessions
+    steps:
+      - uses: actions/checkout@v4
+
+      # JDK 8 is installed only for its up-to-date cacerts, which the Maven JVM uses
+      # to reach HTTPS Central; compilation and every test fork run on JDK 7.
+      - name: Set up JDK 8 (trust store only)
+        id: jdk8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "8"
+
+      # setup-java can no longer resolve Zulu 7, so the JDK 7 tarball comes straight
+      # from Azul's CDN (release toolchain; the public jar says Build-Jdk 1.7.0_75).
+      - name: Set up JDK 7
+        run: |
+          curl -fsSL https://cdn.azul.com/zulu/bin/zulu7.56.0.11-ca-jdk7.0.352-linux_x64.tar.gz -o /tmp/jdk7.tgz
+          tar -xzf /tmp/jdk7.tgz -C "$RUNNER_TEMP"
+          JDK7="$RUNNER_TEMP/zulu7.56.0.11-ca-jdk7.0.352-linux_x64"
+          echo "JAVA_HOME=$JDK7" >> "$GITHUB_ENV"
+          echo "$JDK7/bin" >> "$GITHUB_PATH"
+
+      - name: Install Maven 3.8.8 (last Maven line that runs on Java 7)
+        run: |
+          curl -fsSL https://archive.apache.org/dist/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz -o /tmp/maven.tgz
+          tar -xzf /tmp/maven.tgz -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/apache-maven-3.8.8/bin" >> "$GITHUB_PATH"
+
+      - name: Configure Maven JVM
+        run: |
+          echo "MAVEN_OPTS=-Xmx3g -XX:MaxPermSize=512m -Djava.awt.headless=true -Dhttps.protocols=TLSv1.2 -Djavax.net.ssl.trustStore=${{ steps.jdk8.outputs.path }}/jre/lib/security/cacerts -Djavax.net.ssl.trustStorePassword=changeit" >> "$GITHUB_ENV"
+          java -version
+          mvn -version
+
+      - name: Build and test
+        run: |
+          if [ -n "${{ inputs.test-filter }}" ]; then
+            mvn $MVN_FLAGS clean install -pl "$MODULES" -am \
+              -Dtest='${{ inputs.test-filter }}' -DfailIfNoTests=false -Dsurefire.failIfNoSpecifiedTests=false
+          else
+            mvn $MVN_FLAGS clean install -pl "$MODULES" -am
+          fi
+
+      - name: Test summary (per-module counts and skip reasons)
+        if: always()
+        run: python3 .github/seal/surefire-summary.py .
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: jetty-server-jars
+          path: |
+            jetty-server/target/jetty-server-9.2.24.v20180105.jar
+            jetty-server/target/jetty-server-9.2.24.v20180105-config.jar
+            jetty-server/target/jetty-server-9.2.24.v20180105-tests.jar
+          if-no-files-found: error
